@@ -1,13 +1,13 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
-import { FormData } from './BusinessCardCreator';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import QRCode from "react-native-qrcode-svg";
+import { FormData } from "./BusinessCardCreator";
 
 interface QRCodeComponentProps {
   formData: FormData;
 }
 
-const QRCodeComponent: React.FC<QRCodeComponentProps> = ({ formData }) => {
+const QRCodeComponent = ({ formData }: QRCodeComponentProps) => {
   // Generate QR code data with contact information
   const generateQRData = () => {
     const vCard = `BEGIN:VCARD
@@ -18,6 +18,7 @@ TITLE:${formData.jobTitle}
 EMAIL:${formData.email}
 TEL:${formData.phone}
 URL:${formData.website}
+LINKEDIN:${formData.linkedin}
 END:VCARD`;
     return vCard;
   };
@@ -42,17 +43,17 @@ END:VCARD`;
 
 const styles = StyleSheet.create({
   qrContainer: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 40,
-    alignItems: 'center',
+    alignItems: "center",
     width: 400,
     height: 500,
   },
   qrCodeWrapper: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 20,
     borderRadius: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 4,
@@ -64,15 +65,15 @@ const styles = StyleSheet.create({
   qrLabel: {
     marginTop: 24,
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1F2937',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#1F2937",
+    textAlign: "center",
   },
   qrSubLabel: {
     marginTop: 8,
     fontSize: 16,
-    color: '#6B7280',
-    textAlign: 'center',
+    color: "#6B7280",
+    textAlign: "center",
   },
 });
 

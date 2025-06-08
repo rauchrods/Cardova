@@ -8,9 +8,7 @@ interface BusinessCardPreviewProps {
   formData: FormData;
 }
 
-const BusinessCardPreview: React.FC<BusinessCardPreviewProps> = ({
-  formData,
-}) => {
+const BusinessCardPreview = ({ formData }: BusinessCardPreviewProps) => {
   // Generate QR code data with contact information
   const generateQRData = () => {
     const vCard = `BEGIN:VCARD
@@ -21,6 +19,7 @@ TITLE:${formData.jobTitle}
 EMAIL:${formData.email}
 TEL:${formData.phone}
 URL:${formData.website}
+LINKEDIN:${formData.linkedin}
 END:VCARD`;
     return vCard;
   };
@@ -88,12 +87,16 @@ END:VCARD`;
               <QRCode
                 value={generateQRData()}
                 size={120}
-                color="#2D5A3D"
+                color={formData.brandColor}
                 backgroundColor="white"
               />
             ) : (
               <View style={styles.qrPlaceholder}>
-                <Ionicons name="qr-code" size={80} color="#2D5A3D" />
+                <Ionicons
+                  name="qr-code"
+                  size={80}
+                  color={formData.brandColor}
+                />
               </View>
             )}
           </View>
@@ -165,8 +168,7 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255, 255, 255, 0.3)",
   },
   profilePhotoContainer: {
-    marginTop: 40,
-    marginBottom: 20,
+    marginVertical: 15,
     alignItems: "center",
     padding: 16,
     backgroundColor: "rgba(255, 255, 255, 0.15)",
@@ -176,15 +178,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   profilePhoto: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 100,
+    height: 100,
+    borderRadius: 45,
   },
   mainContent: {
     alignItems: "center",
     flex: 1,
     justifyContent: "center",
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
   cardName: {
     fontSize: 28,
@@ -207,7 +209,6 @@ const styles = StyleSheet.create({
   },
   contactSection: {
     alignItems: "center",
-    marginBottom: 20,
   },
   cardEmail: {
     fontSize: 15,
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
   },
   qrSection: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 16,
   },
   qrCodeContainer: {
     backgroundColor: "white",

@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     left: -1000,
   },
   downloadSection: {
-    marginTop: 20,
+    marginVertical: 4,
   },
   downloadTitle: {
     fontSize: 18,

@@ -35,8 +35,6 @@ const BusinessCardCreator = () => {
     companyLogo: null,
   });
 
-  console.log("formData", formData);
-
   const updateFormData = (field: keyof FormData, value: string | null) => {
     setFormData((prev) => ({
       ...prev,

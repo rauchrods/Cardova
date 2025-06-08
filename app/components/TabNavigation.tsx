@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     paddingHorizontal: 20,
-    paddingTop: 16,
+    padding: 16,
   },
   tab: {
     flex: 1,
