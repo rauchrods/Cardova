@@ -9,13 +9,13 @@ interface InputFieldProps {
   keyboardType?: 'default' | 'email-address' | 'phone-pad';
 }
 
-const InputField: React.FC<InputFieldProps> = ({ 
+const InputField= ({ 
   label, 
   value, 
   onChangeText, 
   placeholder, 
   keyboardType = 'default' 
-}) => {
+}: InputFieldProps) => {
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.inputLabel}>{label}</Text>
