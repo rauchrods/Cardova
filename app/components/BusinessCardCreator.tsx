@@ -19,6 +19,14 @@ export interface FormData {
   companyLogo: string | null;
 }
 
+export interface ExpandedSections {
+  basic: boolean;
+  contact: boolean;
+  photos: boolean;
+  brand: boolean;
+  custom: boolean;
+}
+
 const BusinessCardCreator = () => {
   const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
   const [formData, setFormData] = useState<FormData>({
@@ -35,12 +43,27 @@ const BusinessCardCreator = () => {
     companyLogo: null,
   });
 
+  const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
+    basic: true,
+    contact: false,
+    photos: false,
+    brand: false,
+    custom: false,
+  });
+
   const updateFormData = (field: keyof FormData, value: string | null) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
+
+   const toggleSection = (section: keyof ExpandedSections) => {
+      setExpandedSections((prev) => ({
+        ...prev,
+        [section]: !prev[section],
+      }));
+    };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,7 +75,12 @@ const BusinessCardCreator = () => {
 
       <View style={styles.content}>
         {activeTab === "edit" ? (
-          <EditTab formData={formData} updateFormData={updateFormData} />
+          <EditTab
+            formData={formData}
+            updateFormData={updateFormData}
+            expandedSections={expandedSections}
+            toggleSection={toggleSection}
+          />
         ) : (
           <PreviewTab formData={formData} />
         )}

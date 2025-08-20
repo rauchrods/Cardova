@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { FormData } from "./BusinessCardCreator";
+import { ExpandedSections, FormData } from "./BusinessCardCreator";
 import BasicInformationSection from "./sections/BasicInformation";
 import BrandColorSection from "./sections/BrandColorSection";
 import ContactInformationSection from "./sections/ContactInformation";
@@ -10,31 +10,17 @@ import PhotosLogosSection from "./sections/PhotosLogosSection";
 interface EditTabProps {
   formData: FormData;
   updateFormData: (field: keyof FormData, value: string | null) => void;
+  expandedSections: ExpandedSections;
+  toggleSection: (section: keyof ExpandedSections) => void;
 }
 
-interface ExpandedSections {
-  basic: boolean;
-  contact: boolean;
-  photos: boolean;
-  brand: boolean;
-  custom: boolean;
-}
-
-const EditTab = ({ formData, updateFormData }: EditTabProps) => {
-  const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
-    basic: true,
-    contact: false,
-    photos: false,
-    brand: false,
-    custom: false,
-  });
-
-  const toggleSection = (section: keyof ExpandedSections) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
-  };
+const EditTab = ({
+  formData,
+  updateFormData,
+  expandedSections,
+  toggleSection,
+}: EditTabProps) => {
+ 
 
   return (
     <ScrollView
