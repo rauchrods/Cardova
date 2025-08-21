@@ -3,14 +3,15 @@ import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
 import React, { useRef } from "react";
 import {
-    Alert,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import ViewShot from "react-native-view-shot";
+import { hasRequiredFormFields } from "../utils/commons";
 import { FormData } from "./BusinessCardCreator";
 import BusinessCardPreview from "./BusinessCardPreview";
 import QRCodeComponent from "./QRCodeComponent";
@@ -23,7 +24,17 @@ const PreviewTab: React.FC<PreviewTabProps> = ({ formData }) => {
   const businessCardRef = useRef<ViewShot>(null);
   const qrCodeRef = useRef<ViewShot>(null);
 
+  const hasRequiredFields = hasRequiredFormFields(formData);
+
   const handleDownloadCard = async () => {
+    if (!hasRequiredFields) {
+      Alert.alert(
+        "Required Fields Missing",
+        "Please fill in First Name, Last Name, Email, and Job Title to download business card"
+      );
+      return;
+    }
+
     try {
       if (businessCardRef.current?.capture) {
         // Capture the business card as image
@@ -57,6 +68,13 @@ const PreviewTab: React.FC<PreviewTabProps> = ({ formData }) => {
   };
 
   const handleDownloadQR = async () => {
+    if (!hasRequiredFields) {
+      Alert.alert(
+        "Required Fields Missing",
+        "Please fill in First Name, Last Name, Email, and Job Title to generate QR code"
+      );
+      return;
+    }
     try {
       if (qrCodeRef.current?.capture) {
         // Capture the QR code as image

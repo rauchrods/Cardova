@@ -58,12 +58,12 @@ const BusinessCardCreator = () => {
     }));
   };
 
-   const toggleSection = (section: keyof ExpandedSections) => {
-      setExpandedSections((prev) => ({
-        ...prev,
-        [section]: !prev[section],
-      }));
-    };
+  const toggleSection = (section: keyof ExpandedSections) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
 
   return (
     <SafeAreaView style={styles.container}>

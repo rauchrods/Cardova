@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
+import { hasRequiredFormFields } from "../utils/commons";
 import { FormData } from "./BusinessCardCreator";
 
 interface BusinessCardPreviewProps {
@@ -9,6 +10,8 @@ interface BusinessCardPreviewProps {
 }
 
 const BusinessCardPreview = ({ formData }: BusinessCardPreviewProps) => {
+
+  const hasRequiredFields = hasRequiredFormFields(formData);
   // Generate QR code data with contact information
   const generateQRData = () => {
     const vCard = `BEGIN:VCARD
@@ -83,7 +86,7 @@ END:VCARD`;
         {/* QR Code Section - Bottom Center */}
         <View style={styles.qrSection}>
           <View style={styles.qrCodeContainer}>
-            {formData.firstName || formData.email ? (
+            {hasRequiredFields ? (
               <QRCode
                 value={generateQRData()}
                 size={120}
@@ -97,6 +100,9 @@ END:VCARD`;
                   size={80}
                   color={formData.brandColor}
                 />
+                <Text style={styles.qrPlaceholderText}>
+                  Complete required fields
+                </Text>
               </View>
             )}
           </View>
@@ -244,6 +250,13 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
+  },
+    qrPlaceholderText: {
+    fontSize: 10,
+    color: "rgba(0, 0, 0, 0.5)",
+    textAlign: "center",
+    marginTop: 4,
+    fontWeight: "500",
   },
   qrText: {
     fontSize: 14,
